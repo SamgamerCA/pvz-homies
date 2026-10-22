@@ -1786,7 +1786,7 @@
 
     <div class="play-row">
       <button class="big-button" id="btn-start">Let's go!</button>
-      <button class="big-button" id="btn-minigames"><span class="mg-btn-icons" aria-hidden="true"><img data-asset="autumnIcon" alt=""><img data-asset="endlessIcon" alt=""></span>Mini Games<span class="news-dot" id="mg-dot" hidden>NEW</span></button>
+      <button class="big-button" id="btn-minigames"><span class="mg-btn-icons" aria-hidden="true"><img data-asset="fourSlotIcon" alt=""><img data-asset="endlessIcon" alt=""></span>Mini Games<span class="news-dot" id="mg-dot" hidden>NEW</span></button>
     </div>
     <button class="big-button hidden" id="btn-continue">Continue</button>
     <div class="menu-row">
@@ -1954,14 +1954,44 @@
     </div>
   </div>
 
-  <div class="overlay hidden" id="news-screen" data-news-version="6.0">
+  <div class="overlay hidden" id="news-screen" data-news-version="5.3">
     <div class="panel news-panel">
       <button class="news-x" id="news-close" aria-label="Close news">&times;</button>
       <h2 class="outline-text">News</h2>
       <div class="news-body">
+        <img class="news-banner" data-asset="newsMain" alt="PVZ: Homies">
+        <h3 class="news-headline">Update 5.3: The Story Begins</h3>
+        <p class="news-date">Patch 5.3 &middot; Latest</p>
+        <p>Find out where the Calebings came from. A New Game now opens with the story comic, there&rsquo;s a new mini game to beat, and the whole game got a fresh coat of paint.</p>
+        <p class="news-sub">Story</p>
+        <ul>
+          <li><b>Intro comic.</b> Starting a New Game now opens a 2-page comic with its own music, telling how Dr. Caleboss started the Calebing invasion and how the Homies became plants. Click a page to zoom in.</li>
+        </ul>
+        <p class="news-sub">Mini Games</p>
+        <ul>
+          <li><b>4 Slot Challenge.</b> A new mini game: survive 5 waves with only 4 seed slots. No shop, so choose your Homies wisely. Beat it once to earn <b>200 coins</b> for your Adventure. Unlocks when you beat World 3.</li>
+          <li><b>Autumn reward.</b> On your first win, Keegfling&rsquo;s card now drops from the last Calebing.</li>
+        </ul>
+        <p class="news-sub">New look</p>
+        <ul>
+          <li><b>New plant unlocks.</b> Like the original PvZ, new plants now drop as a seed card from the last Calebing of the wave. Pick it up to see the plant&rsquo;s page.</li>
+          <li><b>Choose Your Seeds.</b> The Inventory is now a full PvZ-style seed chooser with its own music and a &ldquo;Let&rsquo;s Rock!&rdquo; button.</li>
+          <li><b>Ready? Set! Plant!</b> Plays at the start of every World, Endless and every mini game.</li>
+          <li><b>New lanes roll in.</b> New lanes now unroll across the lawn from a roll of sod.</li>
+          <li><b>Bigger, cleaner screen.</b> The game is bigger and centered on PC, with new fonts and a loading screen.</li>
+          <li><b>Explosions.</b> Calebings caught in an explosion now burn to a crisp.</li>
+        </ul>
+        <p class="news-sub">Quality of life</p>
+        <ul>
+          <li><b>Keyboard shortcuts.</b> 1&ndash;8 pick a seed packet, S picks the shovel, F toggles fast forward and Space pauses. Right-click or Esc cancels what you&rsquo;re holding.</li>
+          <li><b>Auto-pause.</b> The game pauses itself when you switch tabs or windows.</li>
+          <li><b>Reset Game.</b> Start completely fresh from Settings.</li>
+        </ul>
+
+        <hr class="news-divider">
         <img class="news-banner" data-asset="newsAutumn" alt="Autumn special out now">
-        <h3 class="news-headline">Update 6: Autumn</h3>
-        <p class="news-date">Patch 6.0 &middot; Latest</p>
+        <h3 class="news-headline">Update 5.2: Autumn</h3>
+        <p class="news-date">Patch 5.2</p>
         <p>Fall has come to the lawn. The new <b>Mini Games</b> menu opens with a 5-wave Autumn special on an orange, leaf-covered lawn, with its own soundtrack and a brand-new plant to win.</p>
         <p class="news-sub">Mini Games</p>
         <ul>
@@ -8115,26 +8145,25 @@ function loadAutumnLoadout() {
 }
 // ---- The 4 Slot Challenge: 5 waves with just 4 seed slots (unlocked by beating World 3) ----
 const FOURSLOT_PLAN = {
-  // Wave 1 (drip): one at a time, at most 7s apart, with cones, a vaulter, a newspaper and buckets.
-  1: { script: ['normal', 'normal', 'cone', 'normal', 'polevault', 'cone', 'newspaper', 'cone', 'bucket', 'normal', 'bucket'] },
-  // Wave 2: a steady stream; two pole vaulters charge together halfway.
-  2: { count: 18, gap: [2000, 1400], warm: 0.15,
-       mix: [['normal', 0.3], ['cone', 0.28], ['polevault', 0.14], ['newspaper', 0.14], ['bucket', 0.14]],
-       rush: [{ at: 0.5, type: 'polevault', lanes: 2 }] },
-  // Wave 3: Torch Calebings and the first Imp pack.
-  3: { count: 20, gap: [1850, 1250], warm: 0.12,
-       mix: [['normal', 0.22], ['cone', 0.24], ['bucket', 0.18], ['newspaper', 0.14], ['football', 0.1], ['polevault', 0.12]],
-       inject: [['torch', 0.35], ['torch', 0.7]], imps: [[0.55, 4]] },
-  // Wave 4: more torches, two Imp packs and a football pair.
-  4: { count: 23, gap: [1700, 1100], warm: 0.08,
-       mix: [['normal', 0.18], ['cone', 0.22], ['bucket', 0.2], ['newspaper', 0.14], ['football', 0.13], ['polevault', 0.13]],
-       inject: [['torch', 0.3], ['torch', 0.5], ['torch', 0.8]], imps: [[0.4, 5]],
-       rush: [{ at: 0.65, type: 'football', lanes: 2 }] },
-  // Wave 5 (finale): a vaulter charge, a football pair, torches and two Imp packs.
-  5: { count: 26, gap: [1500, 950], warm: 0.1,
-       mix: [['normal', 0.16], ['cone', 0.24], ['bucket', 0.22], ['newspaper', 0.14], ['football', 0.1], ['polevault', 0.14]],
-       inject: [['torch', 0.3], ['torch', 0.6], ['torch', 0.85]], imps: [[0.35, 4], [0.75, 5]],
-       rush: [{ at: 0.18, type: 'polevault', lanes: 3 }, { at: 0.55, type: 'football', lanes: 2 }] },
+  // Tuned to be beatable with 4 Homies: small waves with lots of room between Calebings.
+  // Wave 1 (drip): one at a time, at most 9s apart.
+  1: { script: ['normal', 'normal', 'cone', 'normal', 'normal', 'polevault', 'cone', 'newspaper', 'normal', 'bucket'] },
+  // Wave 2: a gentle stream of the basics.
+  2: { count: 8, gap: [3600, 3000], warm: 0.25,
+       mix: [['normal', 0.45], ['cone', 0.3], ['polevault', 0.1], ['newspaper', 0.15]] },
+  // Wave 3: the first Torch Calebing and a pair of Imps.
+  3: { count: 9, gap: [3400, 2800], warm: 0.2,
+       mix: [['normal', 0.35], ['cone', 0.3], ['bucket', 0.1], ['newspaper', 0.15], ['polevault', 0.1]],
+       inject: [['torch', 0.6]], imps: [[0.5, 2]] },
+  // Wave 4: a few buckets, one Football Calebing chance, a torch and 3 Imps.
+  4: { count: 10, gap: [3200, 2600], warm: 0.15,
+       mix: [['normal', 0.3], ['cone', 0.3], ['bucket', 0.15], ['newspaper', 0.1], ['football', 0.05], ['polevault', 0.1]],
+       inject: [['torch', 0.5]], imps: [[0.4, 3]] },
+  // Wave 5 (finale): two pole vaulters charge, two torches and 3 Imps.
+  5: { count: 12, gap: [3000, 2300], warm: 0.15,
+       mix: [['normal', 0.28], ['cone', 0.28], ['bucket', 0.16], ['newspaper', 0.12], ['football', 0.06], ['polevault', 0.1]],
+       inject: [['torch', 0.4], ['torch', 0.75]], imps: [[0.55, 3]],
+       rush: [{ at: 0.2, type: 'polevault', lanes: 2 }] },
 };
 const FOURSLOT_LOADOUT_KEY = 'pvzHomiesFourSlotLoadout', FOURSLOT_BEATEN_KEY = 'pvzHomiesFourSlotBeaten';
 const FOURSLOT_REWARD = 200;          // one-time coin reward, added to your Adventure
@@ -8146,8 +8175,8 @@ const MINI_MODES = {
   autumn: { name: 'Autumn', label: 'Autumn', tracker: 'Autumn Special', slots: HOTBAR_MAX, sun: AUTUMN_START_SUN,
     setupMs: AUTUMN_SETUP, breakMs: AUTUMN_BREAK, dripGap: AUTUMN_DRIP_GAP, music: 'music6', plan: AUTUMN_PLAN,
     loadoutKey: AUTUMN_LOADOUT_KEY, tagline: 'Fall is here. So are the Calebings!', pool: () => autumnPool() },
-  fourslot: { name: '4 Slot Challenge', label: '4 Slot', tracker: '4 Slot Challenge', slots: 4, sun: 150,
-    setupMs: 15000, breakMs: 9000, dripGap: 7000, music: 'music', plan: FOURSLOT_PLAN,
+  fourslot: { name: '4 Slot Challenge', label: '4 Slot', tracker: '4 Slot Challenge', slots: 4, sun: 200,
+    setupMs: 20000, breakMs: 12000, dripGap: 9000, music: 'music', plan: FOURSLOT_PLAN,
     loadoutKey: FOURSLOT_LOADOUT_KEY, tagline: 'Only 4 Homies. Make them count!', pool: () => plainPool() },
 };
 function loadMiniLoadout(mode) {
